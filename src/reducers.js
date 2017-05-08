@@ -1,9 +1,16 @@
-export default (state = 0, action) => {
+export default (state, action) => {
+	// console.log(state,action)
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
+    case 'NAME':
+      return {
+      	name:action.name,
+      	time:state.time
+      }
+    case 'TIME':
+      return {
+      	name:state.name,
+      	time:action.time
+      }
     default:
       return state
   }

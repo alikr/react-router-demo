@@ -14,88 +14,30 @@ import {
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import Counter from './Counter'
-import counter from './reducers'
+import Home from './home.js'
+import Edit from './view.js'
+import Topics from './topics.js'
+import reducers from './reducers'
+import store from './store.js'
 
-const store = createStore(counter)
+const stores = createStore(reducers, store)
 
-class Counters extends Component {
-  render(){
-    return (
-      <Counter
-        value={store.getState()}
-        onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-        onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-      />
-    )
-  }
-}
+render((
+  <Provider store={stores}>
+    <BrowserRouter>
+      <div>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><NavLink activeClassName="selected" to="/edit">Edit</NavLink></li>
+          <li><NavLink activeClassName="selected" to="/topics">Topics</NavLink></li>
+        </ul>
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
-
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-)
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>
-          Rendering with React
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>
-          Components
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>
-          Props v. State
-        </Link>
-      </li>
-    </ul>
-
-    <Route path={`${match.url}/:topicId`} component={Topic}/>
-    <Route exact path={match.url} render={() => (
-      <h3>Please select a topic.</h3>
-    )}/>
-  </div>
-)
-
-const red = () => render((
-  <BrowserRouter>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><NavLink activeClassName="selected" to="/about">About</NavLink></li>
-        <li><NavLink activeClassName="selected" to="/counter">counter</NavLink></li>
-        <li><NavLink activeClassName="selected" to="/topics">Topics</NavLink></li>
-      </ul>
-
-      <hr/>
-      <Route exact path="/" component={Home}></Route>
-      <Route path="/counter" component={Counters}/>
-      <Route path="/about" component={About}/>
-      <Route path="/topics" component={Topics}/>
-      <Redirect from="*" to="/" />
-    </div>
-  </BrowserRouter>
-  ),document.getElementById('app'));
-
-red();
-store.subscribe(red);
+        <hr/>
+        <Route exact path="/" component={Home}></Route>
+        <Route path="/edit" component={Edit}/>
+        <Route path="/topics" component={Topics}/>
+        <Redirect form="*" to="" />
+      </div>
+    </BrowserRouter>
+  </Provider>
+),document.getElementById('app'));
