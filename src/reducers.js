@@ -1,17 +1,25 @@
+import {NAME, TIME} from './types.js'
+
 export default (state, action) => {
-	// console.log(state,action)
-  switch (action.type) {
-    case 'NAME':
-      return {
-      	name:action.name,
-      	time:state.time
-      }
-    case 'TIME':
-      return {
-      	name:state.name,
-      	time:action.time
-      }
-    default:
-      return state
+	const fun = reducer[action.type];
+  return fun ? fun(state, action) : state;
+}
+
+const reducer = {
+  [NAME](state, action){
+    state.list.push(action.name)
+    return {
+      name:action.name,
+      time:state.time,
+      list:state.list
+    }
+  },
+  [TIME](state, action){
+    state.list.push(action.time)
+    return {
+      name:state.name,
+      time:action.time,
+      list:state.list
+    }
   }
 }
