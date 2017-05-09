@@ -7,19 +7,21 @@ export default (state, action) => {
 
 const reducer = {
   [NAME](state, action){
-    state.list.push(action.name)
+    var list = Object.assign([],state.list);
+    list.push(action.name)
     return {
       name:action.name,
       time:state.time,
-      list:state.list
+      list
     }
   },
   [TIME](state, action){
-    state.list.push(action.time)
+    var list = Object.assign([],state.list);
+    list.push(action.time)
     return {
       name:state.name,
       time:action.time,
-      list:state.list
+      list
     }
   }
 }
