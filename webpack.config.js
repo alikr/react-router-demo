@@ -5,8 +5,10 @@ const webpackMerge = require('webpack-merge');
 const config = {
     entry: './src/index.js',
     output: {
-        path: path.join(__dirname, '/dist'),
-        filename: 'bundle.js'
+        path: path.join(__dirname, '/dist/js/'),
+        publicPath:"./js/",
+        filename: 'bundle.js',
+        chunkFilename:"[id].js?v=[chunkhash]"
     },
     module: {
         rules: [

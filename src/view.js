@@ -5,7 +5,7 @@ import {NAME, TIME} from './types.js'
 
 class View extends Component {
 	constructor(arg){
-		super(...arg);
+		super();
 		this.updateName = this.updateName.bind(this);
 	}
   render(){
@@ -54,6 +54,6 @@ const mapDispatchProps = (dispatch) =>{
 
 const Edit = connect(mapStateProps,mapDispatchProps)(View);
 
-export default () => (
-  <Edit></Edit>
+export default (match) => (
+  <Edit {...match}></Edit>
 )

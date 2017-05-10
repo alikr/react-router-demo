@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 export default class View extends Component {
-	constructor(){
+	constructor(arg){
 		super();
 		this.changeHandle = this.changeHandle.bind(this);
 		this.state = {
@@ -24,8 +24,10 @@ export default class View extends Component {
 		return(
 		  <div>
 		    <h2>Home</h2>
-		    {this.state.show && <div>show</div>}
-		    <div><button onClick={this.changeHandle}>change | {this.state.show.toString()}</button></div>
+		    <div>
+		    	<button onClick={this.changeHandle}>change | {this.state.show.toString()}</button>
+		    	{this.state.show && <span>show</span>}
+		    </div>
 		    <canvas width='500' height='500' ref={el => this.canvas = el}></canvas>
 		  </div>
 		)
